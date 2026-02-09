@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: trading-ng
+  threads:
+    virtual:
+      enabled: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/trading_ng?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: ${DB_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+server:
+  port: 8080
+
+# Binance API configuration
+binance:
+  api-key: ${BINANCE_API_KEY:}
+  private-key-path: ${BINANCE_PRIVATE_KEY_PATH:}
+  private-key-pass: ${BINANCE_PRIVATE_KEY_PASS:}
+  base-url: ${BINANCE_BASE_URL:https://api.binance.com}
+  stream-url: ${BINANCE_STREAM_URL:wss://stream.binance.com:9443}
+  use-testnet: ${BINANCE_USE_TESTNET:false}
+  # Default trading symbols to subscribe to
+  symbols:
+    - BTCEUR
+    - ETHEUR
+    - BNBEUR
+
+# Trading bot configuration
+bot:
+  enabled: false
+  symbols:
+    - BTCEUR
+    - ETHEUR
+  strategy: SMA
+  short-sma-period: 7
+  long-sma-period: 25
+  vortex-period: 14
+  sampling-interval-seconds: 60
+  order-size-percent: 0.10
+  cooldown-seconds: 300
+  min-order-size-eur: 10.00
+  quote-asset: EUR
+
+logging:
+  level:
+    com.trading.ng: DEBUG
+    com.binance.connector: INFO

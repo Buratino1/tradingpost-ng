@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:trading_ng_test;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+binance:
+  api-key: test-key
+  private-key-path: ""
+  private-key-pass: ""
+  use-testnet: true
+  symbols:
+    - BTCEUR
+
+bot:
+  enabled: false
+  symbols:
+    - BTCEUR
+  strategy: SMA
+  short-sma-period: 3
+  long-sma-period: 7
+  vortex-period: 14
+  sampling-interval-seconds: 10
+  order-size-percent: 0.10
+  cooldown-seconds: 0
+  min-order-size-eur: 1.00
+  quote-asset: EUR
